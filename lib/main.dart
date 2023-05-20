@@ -18,23 +18,39 @@ Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  const AndroidNotificationChannel channel = AndroidNotificationChannel(
-    'high_importance_channel',
-    'High Importance Notifications',
-    description: 'This channel is used for important notifications.',
-    importance: Importance.max,
-  );
+// 안드로이드일 경우 필요
+  // const AndroidNotificationChannel channel = AndroidNotificationChannel(
+  //   'high_importance_channel',
+  //   'High Importance Notifications',
+  //   description: 'This channel is used for important notifications.',
+  //   importance: Importance.max,
+  // );
 
-  final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-      FlutterLocalNotificationsPlugin();
+  // final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+  //     FlutterLocalNotificationsPlugin();
 
-  await flutterLocalNotificationsPlugin
-      .resolvePlatformSpecificImplementation<
-          AndroidFlutterLocalNotificationsPlugin>()
-      ?.createNotificationChannel(channel);
+  // await flutterLocalNotificationsPlugin
+  //     .resolvePlatformSpecificImplementation<
+  //         AndroidFlutterLocalNotificationsPlugin>()
+  //     ?.createNotificationChannel(channel);
+
+// iOS 일 경우 필요
+  // await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  // FirebaseMessaging messaging = FirebaseMessaging.instance;
+  // NotificationSettings settings = await messaging.requestPermission(
+  //   alert: true,
+  //   announcement: false,
+  //   badge: true,
+  //   carPlay: false,
+  //   criticalAlert: false,
+  //   provisional: false,
+  //   sound: true,
+  // );
+  // print('User granted permission: ${settings.authorizationStatus}');
 
   FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
 
+  // await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   // final fcmToken = await FirebaseMessaging.instance.getToken();
   // print("fcmToken : ${fcmToken}");
 
